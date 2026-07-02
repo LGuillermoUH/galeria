@@ -4,7 +4,7 @@ import { writeFile, mkdir, readdir, unlink } from 'node:fs/promises';
 import { resolve, basename } from 'node:path';
 
 const secret = Astro.url.searchParams.get('secret') ?? '';
-const validSecret = secret !== '' && secret === import.meta.env.UPLOAD_SECRET;
+const validSecret = secret !== '' && secret === process.env.UPLOAD_SECRET;
 const imagesDir = resolve('./public/images');
 
 let error = '';
@@ -12,7 +12,7 @@ let error = '';
 if (Astro.request.method === 'POST') {
   const data = await Astro.request.formData();
   const s = (data.get('secret') as string) ?? '';
-  const postValid = s !== '' && s === import.meta.env.UPLOAD_SECRET;
+  const postValid = s !== '' && s === process.env.UPLOAD_SECRET;
 
   if (postValid && data.get('_action') === 'delete') {
     const name = basename((data.get('file') as string) ?? '');
