@@ -1,0 +1,33 @@
+---
+import { readdir } from 'node:fs/promises';
+import { resolve } from 'node:path';
+import '../styles/global.css';
+
+const files = await readdir(resolve('./public/images')).catch(() => [] as string[]);
+const images = files
+  .filter(f => /\.(jpe?g|png|webp|gif|avif)$/i.test(f))
+  .map(f => `/images/${f}`);
+---
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title></title>
+</head>
+<body>
+  <div id="gallery"></div>
+
+  <div id="modal">
+    <button id="modal-close">×</button>
+    <img id="modal-img" alt="" />
+  </div>
+
+  <script is:inline define:vars={{ images }}>
+    window.__images = images;
+  </script>
+  <script>
+    import '../scripts/gallery.ts';
+  </script>
+</body>
+</html>

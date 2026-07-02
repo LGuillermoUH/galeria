@@ -1,0 +1,104 @@
+*, *::before, *::after {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+html, body {
+  height: 100%;
+  background: #080808;
+  overflow-x: hidden;
+}
+
+/* ── GRID BRUTALISTA ───────────────────────────────────────────── */
+#gallery {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  grid-auto-flow: dense;
+  gap: 3px;
+  padding: 3px;
+}
+
+.cell {
+  aspect-ratio: 1;
+  background: #111;
+  overflow: hidden;
+  cursor: pointer;
+}
+
+/* Tres ritmos con periodos coprimos entre sí (7, 11, 5) para que los
+   bloques grandes nunca caigan en el mismo lugar dos veces seguidas. */
+.cell:nth-child(7n + 2) {
+  grid-column: span 2;
+  grid-row: span 2;
+}
+
+.cell:nth-child(11n + 6) {
+  grid-column: span 2;
+}
+
+.cell:nth-child(5n + 4) {
+  grid-row: span 2;
+}
+
+.cell img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+  opacity: 0;
+  transition: opacity 0.35s ease;
+}
+
+.cell img.loaded { opacity: 1; }
+
+.cell:hover img {
+  filter: brightness(0.6);
+  transition: filter 0.2s ease, opacity 0.35s ease;
+}
+
+/* ── MODAL ─────────────────────────────────────────────────────── */
+#modal {
+  display: none;
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.96);
+  z-index: 999;
+  align-items: center;
+  justify-content: center;
+}
+
+#modal.open { display: flex; }
+
+#modal-img {
+  max-width: 92vw;
+  max-height: 92vh;
+  object-fit: contain;
+  display: block;
+}
+
+#modal-close {
+  position: fixed;
+  top: 1.25rem;
+  right: 1.5rem;
+  width: 2.5rem;
+  height: 2.5rem;
+  background: none;
+  border: 1px solid rgba(255, 255, 255, 0.35);
+  color: #fff;
+  font: 1.4rem/2.5rem monospace;
+  text-align: center;
+  cursor: pointer;
+  transition: background 0.15s;
+}
+
+#modal-close:hover { background: rgba(255, 255, 255, 0.12); }
+
+/* ── RESPONSIVE ────────────────────────────────────────────────── */
+@media (max-width: 900px) {
+  #gallery { grid-template-columns: repeat(3, 1fr); }
+}
+
+@media (max-width: 600px) {
+  #gallery { grid-template-columns: repeat(2, 1fr); }
+}

@@ -1,0 +1,13 @@
+{
+  "name": "gallery",
+  "type": "module",
+  "scripts": {
+    "dev": "astro dev",
+    "build": "astro build",
+    "preview": "astro preview"
+  },
+  "dependencies": {
+    "@astrojs/node": "8",
+    "astro": "^5.0.0"
+  }
+}
