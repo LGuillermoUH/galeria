@@ -1,13 +1,13 @@
 {
   "name": "gallery",
   "type": "module",
+  "private": true,
   "scripts": {
-    "dev": "astro dev",
-    "build": "astro build",
-    "preview": "astro preview"
+    "dev": "bun --hot server.ts",
+    "start": "bun server.ts"
   },
   "dependencies": {
-    "@astrojs/node": "8",
-    "astro": "^5.0.0"
+    "react": "^19.2.0",
+    "react-dom": "^19.2.0"
   }
 }

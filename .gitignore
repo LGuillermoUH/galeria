@@ -1,7 +1,9 @@
 node_modules/
-dist/
-.astro/
 .env
+.env.*
+dist/
+*.log
+.claude/
 
 public/images/*
 public/private/*
